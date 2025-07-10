@@ -1,15 +1,15 @@
-function criarContador() {
-  let contador = 0;
+function createCount() {
+  let count = 0;
 
   return function() {
-    contador++;
-    console.log(`Valor atual: ${contador}`);
+    count++;
+    console.log(`Valor atual: ${count}`);
   };
 }
 
-const contador1 = criarContador();
-contador1();
-contador1();
+const counter1 = createCount();
+counter1();
+counter1();
 
-const contador2 = criarContador();
-contador2();
+const counter2 = createCount();
+counter2();
