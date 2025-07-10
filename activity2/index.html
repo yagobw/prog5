@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividade 2</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+      }
+      button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = "Type something...";
+
+      const addButton = document.createElement("button");
+      addButton.textContent = "Add";
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.disabled = true;
+
+      document.body.appendChild(input);
+      document.body.appendChild(addButton);
+      document.body.appendChild(deleteButton);
+
+      let list; 
+
+      function updateDeleteButton() {
+        if (list && list.children.length > 0) {
+          deleteButton.disabled = false;
+        } else {
+          deleteButton.disabled = true;
+        }
+      }
+
+      addButton.addEventListener("click", () => {
+        const text = input.value.trim();
+
+        if (text === "") return;
+
+        if (!list) {
+          list = document.createElement("ul");
+          document.body.appendChild(list);
+        }
+
+        const itens = Array.from(list.children).map((li) => li.textContent);
+        if (!itens.includes(text)) {
+          const novoItem = document.createElement("li");
+          novoItem.textContent = text;
+          list.appendChild(novoItem);
+        }
+
+        input.value = "";
+        updateDeleteButton();
+      });
+
+      deleteButton.addEventListener("click", () => {
+        if (list && list.lastChild) {
+          list.removeChild(list.lastChild);
+          updateDeleteButton();
+        }
+      });
+    </script>
+  </body>
+</html>
